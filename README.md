@@ -22,13 +22,13 @@
 
 	{
 		"require": {
-			"php-imap/php-imap": "~2.0"
+			"zlymarcin/php-imap": "~2.0"
 		}
 	}
 
 Or
 
-	$ composer require php-imap/php-imap ~2.0
+	$ composer require zlymarcin/php-imap ~2.0
 
 ### Migration from `v1.*` to `v2.*`
 
