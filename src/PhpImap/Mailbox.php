@@ -463,7 +463,14 @@ class Mailbox {
 		$mail->date = date('Y-m-d H:i:s', isset($head->date) ? strtotime(preg_replace('/\(.*?\)/', '', $head->date)) : time());
 		$mail->subject = isset($head->subject) ? $this->decodeMimeStr($head->subject, $this->serverEncoding) : null;
 		$mail->fromName = isset($head->from[0]->personal) ? $this->decodeMimeStr($head->from[0]->personal, $this->serverEncoding) : null;
-		$mail->fromAddress = strtolower($head->from[0]->mailbox . '@' . $head->from[0]->host);
+		if (isset($head->from[0]->host))
+			$mail->fromAddress = strtolower($head->from[0]->mailbox . '@' . $head->from[0]->host);
+  		elseif (isset($head->from[1]->host))
+			$mail->fromAddress = strtolower($head->from[1]->mailbox . '@' . $head->from[1]->host);
+		elseif (isset($head->from[2]->host))
+			$mail->fromAddress = strtolower($head->from[2]->mailbox . '@' . $head->from[2]->host);
+		else
+			$mail->fromAddress = $head->from[0];
 
 		if(isset($head->to)) {
 			$toStrings = array();
